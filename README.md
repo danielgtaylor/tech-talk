@@ -1,6 +1,6 @@
 # Tech Talk
 
-An opinionated Markdown-based slideshow tool that just works.
+An opinionated Markdown-based technical slideshow tool that just works.
 
 ![techtalk](https://cloud.githubusercontent.com/assets/106826/22179439/851145a8-e008-11e6-9c31-c391c4025546.gif)
 
@@ -45,7 +45,7 @@ Now, make your customizations!
 - [Stylesheet (fonts, colors, layout, etc)](https://github.com/danielgtaylor/tech-talk/tree/master/www/style.css)
 - [Javascript (transitions)](https://github.com/danielgtaylor/tech-talk/tree/master/www/script.js)
 - [Terminal default font size](https://github.com/danielgtaylor/tech-talk/tree/master/www/wetty/wetty.js)
-- [Example slideshow](https://github.com/danielgtaylor/tech-talk/tree/master/www/style.css)
+- [Example slideshow](https://github.com/danielgtaylor/tech-talk/tree/master/data/example.md)
 
 Once you are ready:
 
