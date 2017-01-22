@@ -4,7 +4,7 @@ An opinionated Markdown-based technical slideshow tool that just works.
 
 ![techtalk](https://cloud.githubusercontent.com/assets/106826/22179439/851145a8-e008-11e6-9c31-c391c4025546.gif)
 
-- Write your slides with Markdown
+- Write your slides with [Markdown](https://github.com/gnab/remark/wiki/Markdown)
 - Built-in terminal (both local or via SSH)
 - Simple, self-contained executable for Windows, Mac, Linux
 - Trivial to customize and distribute within your company
@@ -30,7 +30,7 @@ Then go to [http://localhost:4000/](http://localhost:4000/) to view.
 
 Sending around boilerplate or configs to everyone sucks. Build your own self-contained executable with your company's theme and let people focus on making great talks.
 
-First you'll want to install [Go](). Then:
+First you'll want to install [Go](https://golang.org/). Then:
 
 ```sh
 git clone https://github.com/danielgtaylor/tech-talk.git

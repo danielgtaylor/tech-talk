@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
@@ -8,7 +8,7 @@ body {
 
 h1, h2, h3 {
   font-family: 'Raleway', 'Helvetica', sans-serif;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 a {
@@ -79,6 +79,10 @@ kbd {
   background-color: #fff;
   font-size: 25px;
   border-top: 6px solid #0086b3;
+}
+
+.remark-slide-content h1 {
+  font-size: 50px;
 }
 
 .remark-slide-scaler {

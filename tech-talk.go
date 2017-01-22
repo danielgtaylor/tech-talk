@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"text/template"
 	"time"
 
@@ -29,6 +30,13 @@ var sshHost *string
 
 // Return an HTML page with the slideshow
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	// If we aren't getting the index itself, serve static files in the
+	// same directory as the input Markdown slides file.
+	if r.URL.Path != "/" {
+		http.FileServer(http.Dir(filepath.Dir(mdFilename))).ServeHTTP(w, r)
+		return
+	}
+
 	var data TemplateValues
 
 	// Read the file on each request so that updates get applied when working
