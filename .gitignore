@@ -1,0 +1,5 @@
+bin
+pkg
+bindata.go
+tech-talk
+src/github.com/jteeuwen/go-bindata

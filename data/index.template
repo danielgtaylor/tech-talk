@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tech Talk</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+    <link rel="stylesheet" href="/static/style.css"/>
+  </head>
+  <body class="preload">
+    <textarea id="source">
+{{ .Prefix }}
+{{ .Markdown }}
+    </textarea>
+    <div id="terminal" class="animated slideOutUp">
+      <iframe seamless src="/static/wetty/"></iframe>
+      <a class="btn">Close</a>
+    </div>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

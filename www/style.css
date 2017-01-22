@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body {
+  font-family: 'Lato', 'Arial', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Raleway', 'Helvetica', sans-serif;
+  font-weight: bold;
+}
+
+a {
+  color: #0086b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #f2f2f2;
+}
+
+th {
+  color: #000;
+  background-color: #f2f2f2;
+  padding: 12px;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #f2f2f2;
+  border-right: 1px solid #f2f2f2;
+}
+
+code.remark-inline-code {
+  background: #f2f2f2;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+kbd {
+  display: inline-block;
+	min-width: 1em;
+	padding: .2em .3em;
+	font: normal .85em/1 "Lato", Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	border-radius: .3em;
+	border: none;
+	cursor: default;
+	user-select: none;
+  background: rgb(80, 80, 80);
+  background: linear-gradient(to bottom, rgb(60, 60, 60), rgb(80, 80, 80));
+	color: rgb(250, 250, 250);
+	text-shadow: -1px -1px 0 rgb(70, 70, 70);
+	box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+}
+
+.preload * {
+  animation-duration: 1ms !important;
+}
+
+.animated {
+  animation-duration: 0.5s;
+}
+
+.hljs-default .hljs {
+  background: #f2f2f2;
+  border-radius: 3px;
+}
+
+.remark-container {
+  background-color: #333;
+}
+
+.remark-slide-content {
+  color: #000;
+  background-color: #fff;
+  font-size: 25px;
+  border-top: 6px solid #0086b3;
+}
+
+.remark-slide-scaler {
+  box-shadow: 0 0 30px #888;
+}
+
+.remark-code, .remark-inline-code {
+  font-family: 'Ubuntu Mono';
+  font-size: 19pt;
+}
+
+.remark-slide-number {
+  opacity: 0.1;
+}
+
+#terminal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  opacity: 0.98;
+  animation-duration: 0.3s;
+  animation-timing: ease-out;
+}
+
+#terminal iframe {
+  width: 100%;
+  height: 95vh;
+  padding: 0;
+  margin: 0;
+  border: none;
+  shadow: none;
+}
+
+#terminal a.btn {
+  display: inline-block;
+  width: 100%;
+  height: 5vh;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  margin-top: -5px;
+  padding-top: 6px;
+}
