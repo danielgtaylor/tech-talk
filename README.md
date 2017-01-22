@@ -6,7 +6,7 @@ An opinionated Markdown-based technical slideshow tool that just works.
 
 - Write your slides with [Markdown](https://github.com/gnab/remark/wiki/Markdown)
 - Built-in terminal (both local or via SSH)
-- Simple, self-contained executable for Windows, Mac, Linux
+- Simple, self-contained executable for Mac & Linux
 - Trivial to customize and distribute within your company
 
 ## Usage
