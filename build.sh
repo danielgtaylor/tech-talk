@@ -1,5 +1,5 @@
 #!/bin/sh
 
-./bin/go-bindata data www/...
+$GOPATH/bin/go-bindata data www/...
 
 go build

@@ -3,6 +3,7 @@
   <head>
     <title>Tech Talk</title>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/static/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
     <link rel="stylesheet" href="/static/style.css"/>
   </head>

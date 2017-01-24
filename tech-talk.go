@@ -3,18 +3,20 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"os/exec"
+	"os/user"
+	"path"
 	"path/filepath"
 	"text/template"
 	"time"
 
 	"github.com/elazarl/go-bindata-assetfs"
 	"github.com/googollee/go-socket.io"
-	"github.com/kr/pty"
 )
 
 type TemplateValues struct {
@@ -22,11 +24,39 @@ type TemplateValues struct {
 	Markdown string
 }
 
+const DEFAULT_HOST = "localhost"
+const VERSION = "1.0.0"
+
 var indexTemplate *template.Template
 var socketServer *socketio.Server
 var mdFilename string
+var currentUser *user.User
 
+var sshType *string
 var sshHost *string
+var key *string
+var pass *string
+
+// Checks if a file exists and can be accessed.
+func check_access(filename string) bool {
+	_, err := os.Stat(filename)
+	return err == nil
+}
+
+// Copy data from a reader (e.g. PTY or Stdin pipe) to the web socket.
+func copyToSocket(r io.Reader, so socketio.Socket) {
+	for {
+		data := make([]byte, 512)
+		n, err := r.Read(data)
+		if err != nil {
+			log.Println(err)
+			break
+		}
+		if n > 0 {
+			so.Emit("output", string(data))
+		}
+	}
+}
 
 // Return an HTML page with the slideshow
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -72,83 +102,64 @@ func createSocketServer() {
 	socketServer.On("connection", func(so socketio.Socket) {
 		log.Printf("Terminal connected from %s\n", so.Request().RemoteAddr)
 
-		var c *exec.Cmd
-
-		// If SSH was explicitly set, then prefer it.
-		if *sshHost != "localhost" {
-			c = exec.Command("/usr/bin/ssh", *sshHost)
+		if *sshType == "internal" || CAN_USE_EXTERNAL == false {
+			log.Println("Using internal SSH client")
+			internalSSH(so)
 		} else {
-			// On Mac we should have `/usr/bin/login` which does not require root,
-			// so there we use it. Otherwise just start an SSH session with the
-			// current user on localhost to get a shell without root.
-			if _, err := os.Stat("/usr/bin/login"); err == nil {
-				c = exec.Command("/usr/bin/login", "-f", os.Getenv("USER"))
-			} else {
-				c = exec.Command("/usr/bin/ssh", *sshHost)
-			}
+			externalSSH(so)
 		}
-
-		f, err := pty.Start(c)
-		if err != nil {
-			panic(err)
-		}
-
-		so.On("input", func(msg string) {
-			f.Write([]byte(msg))
-		})
-
-		so.On("resize", func(msg map[string]int) {
-			rows, cols, err := pty.Getsize(f)
-
-			if err != nil {
-				log.Printf("Error: could not get PTY size. %s\n", err)
-				return
-			}
-
-			if rows != msg["row"] || cols != msg["col"] {
-				log.Printf("Resize: %d cols x %d row\n", msg["col"], msg["row"])
-				pty.Setsize(f, uint16(msg["row"]), uint16(msg["col"]))
-			}
-		})
-
-		so.On("disconnection", func() {
-			log.Println("Terminal disconnect")
-		})
-
-		go func() {
-			// Read from the PTY until we can't read anymore!
-			for {
-				data := make([]byte, 512)
-				n, err := f.Read(data)
-				if err != nil {
-					log.Println(err)
-					break
-				}
-				if n > 0 {
-					so.Emit("output", string(data))
-				}
-			}
-		}()
 	})
 
 	socketServer.On("error", func(so socketio.Socket, err error) {
-		log.Println("error:", err)
+		log.Println("Error:", err)
 	})
 }
 
 func main() {
+	u, err := user.Current()
+	if err != nil {
+		log.Fatal("Couldn't get current user!")
+	}
+	currentUser = u
+
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: tech-talk [slides.md]\n")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
 
-	sshHost = flag.String("host", "localhost", "SSH hostname")
+	// Connection options
+	sshHost = flag.String("host", DEFAULT_HOST, "SSH connection [user@]`hostname`[:port]")
+	sshType = flag.String("ssh", "auto", "SSH `method` [auto, internal]")
+
+	// Auth options
+	keyDefault := ""
+
+	idRsaPath := path.Join(currentUser.HomeDir, ".ssh", "id_rsa")
+	if check_access(idRsaPath) {
+		keyDefault = idRsaPath
+	}
+
+	key = flag.String("key", keyDefault, "SSH private key `path` (for internal SSH)")
+	pass = flag.String("pass", "", "SSH `password` (for internal SSH)")
+
+	// Misc options
+	version := flag.Bool("v", false, "Alias for --version")
+	flag.BoolVar(version, "version", false, "Print program version and exit")
 
 	flag.Parse()
 	args := flag.Args()
 
+	if *version {
+		fmt.Printf("tech-talk: %s\n", VERSION)
+		return
+	}
+
 	if len(args) > 0 {
+		if !check_access(args[0]) {
+			log.Fatalf("Cannot access %s", args[0])
+		}
+
 		mdFilename = args[0]
 	}
 
@@ -174,8 +185,12 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	// TODO: run `open http://localhost:4000/`
 	log.Println("Server started on http://localhost:4000/")
+
+	if check_access("/usr/bin/open") {
+		c := exec.Command("/usr/bin/open", "http://localhost:4000")
+		c.Start()
+	}
 
 	log.Panic(s.ListenAndServe())
 }

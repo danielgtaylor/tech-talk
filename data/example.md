@@ -56,6 +56,20 @@ Partial slide updates are also supported by using the `--` delimiter or by simpl
 But you aren't limited to just list items.
 
 ---
+
+# Images & Videos
+
+Assets in the same folder as the Markdown slides can be referenced relative to the root of the server.
+
+.center[
+![Amy Schumer](/static/amy.gif)]
+
+```html
+<img src="/my-image.png"/>
+<video src="/my-video.mp4"/>
+```
+
+---
 class: center, middle
 
 Optional classes can control layout
