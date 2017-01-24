@@ -2,7 +2,7 @@
 
 An opinionated Markdown-based technical slideshow tool with a built-in terminal that just works.
 
-![techtalk](https://cloud.githubusercontent.com/assets/106826/22179439/851145a8-e008-11e6-9c31-c391c4025546.gif)
+![techtalk](https://cloud.githubusercontent.com/assets/106826/22236695/229d6c66-e1bc-11e6-9bf2-5b8cfa500e91.gif)
 
 - Write your slides with [Markdown](https://github.com/gnab/remark/wiki/Markdown)
 - Built-in terminal (both local or via SSH)
