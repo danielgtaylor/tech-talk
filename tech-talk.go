@@ -25,7 +25,7 @@ type TemplateValues struct {
 }
 
 const DEFAULT_HOST = "localhost"
-const VERSION = "1.0.0"
+const VERSION = "1.1.0"
 
 var indexTemplate *template.Template
 var socketServer *socketio.Server
