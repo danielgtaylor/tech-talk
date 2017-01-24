@@ -17,6 +17,7 @@
       <a class="btn">Close</a>
     </div>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+    <script  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&delayStartupUntil=configured"></script>
     <script src="/static/script.js"></script>
   </body>
 </html>

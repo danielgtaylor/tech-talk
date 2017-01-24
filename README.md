@@ -61,6 +61,7 @@ Now, make your customizations!
 - [Javascript (transitions)](https://github.com/danielgtaylor/tech-talk/tree/master/www/script.js)
 - [Terminal default font size](https://github.com/danielgtaylor/tech-talk/tree/master/www/wetty/wetty.js)
 - [Example slideshow](https://github.com/danielgtaylor/tech-talk/tree/master/data/example.md)
+- [HTML template](https://github.com/danielgtaylor/tech-talk/blob/master/data/index.template)
 
 Once you are ready:
 

@@ -102,3 +102,14 @@ window.addEventListener('load', () => {
     document.body.classList.remove('preload');
   }, 200);
 });
+
+// Setup MathJax
+MathJax.Hub.Config({
+  asciimath2jax: {
+    // Since Markdown makes heavy use of backticks, prefer a syntax that
+    // won't conflict with Markdown processing.
+    delimiters: [['%%','%%']]
+  }
+});
+
+MathJax.Hub.Configured();

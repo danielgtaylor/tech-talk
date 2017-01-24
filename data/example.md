@@ -2,7 +2,7 @@
 
 This is an example. Press <kbd>&#8680;</kbd> to continue.
 
-[View example source](https://github.com/danielgtaylor/tech-talk/data/example.md)
+[View example source](https://github.com/danielgtaylor/tech-talk/blob/master/data/example.md)
 
 ---
 
@@ -54,6 +54,23 @@ Partial slide updates are also supported by using the `--` delimiter or by simpl
 - And one last one!
 
 But you aren't limited to just list items.
+
+---
+
+# Math & Formulas
+
+Complex formulas are easy to display with [AsciiMath](http://asciimath.org/#syntax) using `%%`, or Tex / LaTeX using `$$` delimiters thanks to MathJax.
+
+.center[
+**AsciiMath example**
+<!-- Notice that we escape the `*` because it has special meaning in Markdown -->
+%%i = sum(1.65 \* 0.000125^(o - 1) \* (1 - 2.718^(-0.04t) / 4.15) \* (7490duz) / (100h))%%
+]
+
+.center[
+**LaTeX example**
+$$ax^2 + bx + c = 0$$
+]
 
 ---
 

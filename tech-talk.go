@@ -25,7 +25,7 @@ type TemplateValues struct {
 }
 
 const DEFAULT_HOST = "localhost"
-const VERSION = "1.1.0"
+const VERSION = "1.2.0"
 
 var indexTemplate *template.Template
 var socketServer *socketio.Server
@@ -36,6 +36,7 @@ var sshType *string
 var sshHost *string
 var key *string
 var pass *string
+var noBrowser *bool
 
 // Checks if a file exists and can be accessed.
 func check_access(filename string) bool {
@@ -144,6 +145,7 @@ func main() {
 	pass = flag.String("pass", "", "SSH `password` (for internal SSH)")
 
 	// Misc options
+	noBrowser = flag.Bool("n", false, "Do not automatically open browser")
 	version := flag.Bool("v", false, "Alias for --version")
 	flag.BoolVar(version, "version", false, "Print program version and exit")
 
@@ -187,7 +189,7 @@ func main() {
 
 	log.Println("Server started on http://localhost:4000/")
 
-	if check_access("/usr/bin/open") {
+	if !*noBrowser && check_access("/usr/bin/open") {
 		c := exec.Command("/usr/bin/open", "http://localhost:4000")
 		c.Start()
 	}
