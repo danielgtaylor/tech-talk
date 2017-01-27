@@ -8,6 +8,7 @@ An opinionated Markdown-based technical slideshow tool with a built-in terminal 
 - Built-in terminal (both local or via SSH)
 - Supports presenter mode with notes & timer, cloned displays, etc.
 - Simple, self-contained executable for Winows, Mac & Linux
+- PDF export with your browser's built-in print to PDF
 - Trivial to customize and distribute within your company
 
 ## Usage
@@ -70,8 +71,11 @@ Once you are ready:
 ./build.sh
 ./tech-talk
 
-# Or, cross-compile, e.g.
+# Or, cross-compile, e.g:
 GOOS=linux GOARCH=386 ./build.sh
+
+# Automated release (cross-compile to supported platforms):
+./release.sh
 ```
 
 Remember to run `./build.sh` each time you make a change, and your browser may cache items so Cmd+Shift+R or Ctrl+Shift+R to force a refresh are useful.
