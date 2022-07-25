@@ -79,7 +79,7 @@ $$ax^2 + bx + c = 0$$
 Assets in the same folder as the Markdown slides can be referenced relative to the root of the server.
 
 .center[
-![Amy Schumer](/static/amy.gif)]
+![Amy Schumer](/static/www/amy.gif)]
 
 ```html
 <img src="/my-image.png"/>

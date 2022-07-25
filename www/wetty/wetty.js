@@ -66,6 +66,9 @@ socket.on('disconnect', function() {
 
 // Support sending text from outside iframe
 window.addEventListener("message", (msg) => {
-  socket.emit('input', msg.data);
+  if (msg.data && msg.data.target && msg.data.target.includes("metamask")) {
+    return;
+  }
+  socket.emit("input", msg.data);
   term.focus();
 });

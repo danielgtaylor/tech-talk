@@ -6,9 +6,9 @@ const HIGHLIGHT_THEME = 'github';
 
 // See options at https://daneden.github.io/animate.css/
 const TRANSITIONS = {
-  NEXT: 'bounceInUp',
-  PREV: 'slideInLeft',
-  INCREMENTAL: 'fadeIn'
+  NEXT: 'animate__bounceInUp',
+  PREV: 'animate__slideInLeft',
+  INCREMENTAL: 'animate__fadeIn'
 };
 
 // Get the first title element of a slide and return its text content.
@@ -49,10 +49,10 @@ slideshow.on('beforeShowSlide', (next) => {
     direction = TRANSITIONS.INCREMENTAL;
   }
 
-  nextDiv.classList.add('animated');
+  nextDiv.classList.add('animate__animated');
   nextDiv.classList.add(direction);
 
-  prevDiv.classList.remove('animated');
+  prevDiv.classList.remove('animate__animated');
   prevDiv.classList.remove(TRANSITIONS.NEXT);
   prevDiv.classList.remove(TRANSITIONS.PREV);
   prevDiv.classList.remove(TRANSITIONS.INCREMENTAL);
@@ -62,8 +62,8 @@ const term = document.querySelector('#terminal');
 
 // Slide the term into or out of the viewport.
 function toggleTerm() {
-  term.classList.toggle('slideInDown');
-  term.classList.toggle('slideOutUp');
+  term.classList.toggle('animate__slideInDown');
+  term.classList.toggle('animate__slideOutUp');
 }
 
 // Toggle either from keypress or pressing the close button.

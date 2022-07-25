@@ -3,21 +3,21 @@
   <head>
     <title>Tech Talk</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="/static/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
-    <link rel="stylesheet" href="/static/style.css"/>
+    <link rel="icon" type="image/png" href="/static/www/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="/static/www/style.css"/>
   </head>
   <body class="preload">
     <textarea id="source">
 {{ .Prefix }}
 {{ .Markdown }}
     </textarea>
-    <div id="terminal" class="animated slideOutUp">
-      <iframe seamless src="/static/wetty/"></iframe>
+    <div id="terminal" class="animate__animated animate__slideOutUp">
+      <iframe seamless src="/static/www/wetty/"></iframe>
       <a class="btn">Close</a>
     </div>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
-    <script  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&delayStartupUntil=configured"></script>
-    <script src="/static/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML&delayStartupUntil=configured"></script>
+    <script src="/static/www/script.js"></script>
   </body>
 </html>

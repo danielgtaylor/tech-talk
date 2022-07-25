@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"flag"
 	"fmt"
 	"io"
@@ -15,9 +16,11 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/elazarl/go-bindata-assetfs"
-	"github.com/googollee/go-socket.io"
+	socketio "github.com/googollee/go-socket.io"
 )
+
+//go:embed data www
+var fs embed.FS
 
 type TemplateValues struct {
 	Prefix   string
@@ -78,11 +81,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		b, _ = ioutil.ReadFile(mdFilename)
 		data.Markdown = string(b)
 	} else {
-		b, _ = Asset("data/example.md")
+		b, _ = fs.ReadFile("data/example.md")
 		data.Markdown = string(b)
 	}
 
-	b, _ = Asset("data/prefix.md")
+	b, _ = fs.ReadFile("data/prefix.md")
 	data.Prefix = string(b)
 
 	w.Header().Add("Content-Type", "text/html")
@@ -170,15 +173,14 @@ func main() {
 	http.Handle("/wetty/socket.io/", socketServer)
 
 	// Setup web server
-	indexBytes, _ := Asset("data/index.template")
+	indexBytes, _ := fs.ReadFile("data/index.template")
 	indexTemplate = template.Must(template.New("index").Parse(string(indexBytes)))
 
 	http.HandleFunc("/", indexHandler)
 
 	http.Handle("/static/",
 		http.StripPrefix("/static/",
-			http.FileServer(
-				&assetfs.AssetFS{Asset: Asset, AssetDir: AssetDir, AssetInfo: AssetInfo, Prefix: "www"})))
+			http.FileServer(http.FS(fs))))
 
 	s := &http.Server{
 		Addr:           ":4000",

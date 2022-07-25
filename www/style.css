@@ -61,7 +61,7 @@ kbd {
   animation-duration: 1ms !important;
 }
 
-.animated {
+.animate__animated {
   animation-duration: 0.5s;
 }
 
