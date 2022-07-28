@@ -45,14 +45,14 @@ Then go to [http://localhost:4000/](http://localhost:4000/) to view.
 
 Sending around boilerplate or configs to everyone sucks. Build your own self-contained executable with your company's theme and let people focus on making great talks.
 
-First you'll want to install [Go](https://golang.org/) and [Glide](https://github.com/Masterminds/glide) (e.g. `curl https://glide.sh/get | sh`). Then:
+First you'll want to install [Go](https://golang.org/). Then:
 
 ```sh
 mkdir -p $GOPATH/src/github.com/danielgtaylor
 cd $GOPATH/src/github.com/danielgtaylor
 git clone https://github.com/danielgtaylor/tech-talk.git
 cd tech-talk
-$GOPATH/bin/glide install
+go install
 ```
 
 Now, make your customizations!
@@ -90,7 +90,6 @@ This project is possible because of the amazing work done by many people in the 
 - [Socket.io](https://github.com/googollee/go-socket.io)
 - [pty](https://github.com/kr/pty)
 - [Wetty](https://github.com/krishnasrinivas/wetty)
-- [go-bindata](https://github.com/jteeuwen/go-bindata)
 - [crypto/ssh](https://godoc.org/golang.org/x/crypto/ssh)
 
 So, how does this beast work? Simple, really. It starts both a web server and Socket.IO server, renders an index page with Remark.js using the user-supplied Markdown, which in turn contains an `iframe` with a terminal that uses the socket to communicate with a PTY running either a login shell or `ssh` session. For the internal SSH client there is no client-side PTY but instead a couple pipes through an SSH connection.

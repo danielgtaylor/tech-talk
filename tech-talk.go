@@ -40,6 +40,7 @@ var sshHost *string
 var key *string
 var pass *string
 var noBrowser *bool
+var templatePath *string
 
 // Checks if a file exists and can be accessed.
 func check_access(filename string) bool {
@@ -87,6 +88,14 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	b, _ = fs.ReadFile("data/prefix.md")
 	data.Prefix = string(b)
+
+	if *templatePath != "" {
+		b, err := ioutil.ReadFile(*templatePath)
+		if err != nil {
+			panic(err)
+		}
+		indexTemplate = template.Must(template.New("index").Parse(string(b)))
+	}
 
 	w.Header().Add("Content-Type", "text/html")
 	indexTemplate.Execute(w, data)
@@ -151,6 +160,8 @@ func main() {
 	noBrowser = flag.Bool("n", false, "Do not automatically open browser")
 	version := flag.Bool("v", false, "Alias for --version")
 	flag.BoolVar(version, "version", false, "Print program version and exit")
+
+	templatePath = flag.String("template", "", "Path to custom HTML template")
 
 	flag.Parse()
 	args := flag.Args()
